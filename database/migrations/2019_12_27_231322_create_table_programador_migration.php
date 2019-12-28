@@ -21,7 +21,7 @@ class CreateTableProgramadorMigration extends Migration
           $table->string('modelo');
           $table->string('serie', 30)->unique();
           $table->datetime('alta');
-          $table->date('uconexion');
+          $table->datetime('uconexion');
           $table->bigInteger('cliente_id')->unsigned();
 
 

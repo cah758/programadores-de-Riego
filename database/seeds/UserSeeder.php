@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\User;
 class UserSeeder extends Seeder
 {
     /**
@@ -13,9 +13,9 @@ class UserSeeder extends Seeder
     {
       User::create([
         'name' => 'System',
-        'last_name'  => 'Administrator',
+        'username'  => 'admin',
         'email'      => 'postmaster@domain.com',
-        'password'   =>  Hash::make('secret')
+        'password'   =>  Hash::make('1q2w3e4r5t')
       ]);
     }
 }

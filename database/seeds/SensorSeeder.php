@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Sensor;
-
+use App\Programador;
 class SensorSeeder extends Seeder
 {
   /**
@@ -12,12 +12,15 @@ class SensorSeeder extends Seeder
    */
    public function run()
    {
+     $elementos = array('S1', 'S2','S3', 'S4');
+     $programadores = Programador::all(); //devolverá todos los programadores
+     $azar[]=$programadores;
      for ($i=0; $i <30 ; $i++) {
        Sensor::create([
-         'nombre'=> $this->generateRandomString(10),
+         'nombre'=> $elementos[array_rand($elementos, 1)],
          'fecha'=> $this->randomDate(),
          'valor'=> rand(0, 100),
-         'programador_id' => random_int(0, 30)
+         'programador_id' => $programadores[array_rand($azar)]->id
  ]);
      }
 

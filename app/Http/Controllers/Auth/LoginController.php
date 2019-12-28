@@ -40,4 +40,8 @@ class LoginController extends Controller
     {
       return 'username';
     }
+    public function login()
+    {
+      return route('auth.login');
+    }
 }

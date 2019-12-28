@@ -6,6 +6,8 @@
     <th>Nombre del sensor</th>
     <th>fecha</th>
     <th>valor</th>
+    <th>programador</th>
+
   </tr>
 </thead>
 .<tbody>
@@ -15,6 +17,7 @@
       <td>{{ $sensor->nombre }}</td>
       <td>{{ $sensor->fecha }}</td>
       <td>{{ $sensor->valor }}</td>
+      <td>{{ $sensor->programador->modelo }}</td>
     </tr>
   @endforeach
 </tbody>

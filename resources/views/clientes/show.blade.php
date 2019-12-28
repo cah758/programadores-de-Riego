@@ -32,7 +32,7 @@ Cliente
           {{Session::get('success')}}
         </div>
         @endif
-      <form method="POST" action="{{ route('clientes.update',$cliente->id) }}"  role="form">
+      <form method="POST" action="{{ route('update',$cliente->id) }}"  role="form">
         <input name="_method" type="hidden" value="PUT">
         @csrf
         <div class="row">

@@ -43,6 +43,7 @@ Sensores
           <th class="text-center">Nombre</th>
           <th class="text-center">fecha</th>
           <th class="text-center">valor</th>
+          <th class="text-center">Programador</th>
           <th class="text-center">Acciones</th>
       </tr>
     </thead>
@@ -53,15 +54,28 @@ Sensores
               <td class="text-center">{{ $sensor->nombre}}</td>
               <td class="text-center">{{ $sensor->fecha }}</td>
               <td class="text-center">{{ $sensor->valor}}</td>
-              <td class="text-center">
-                <a href="{{ route('sensores.show', $sensor->id) }}" class="btn btn-round btn-primary">Ver</a>
-                <a href="{{ route('sensores.update', $sensor->id) }}" class="btn btn-round btn-info">Editar</a>
-                <form action="{{route('sensores.destroy', $sensor->id)}}" method="post">
-                    {{csrf_field()}}
-                    <input name="_method" type="hidden" value="DELETE">
+              <td class="text-center">{{ $sensor->programador->modelo}}</td>
 
-                    <button class="btn btn-round btn-danger" type="submit"> Eliminar</button>
-                </form>
+              <td class="text-center">
+                <div class="row">
+                  <div class="col-md-6 pr-1">
+                    <div class="">
+                      <a href="{{ route('sensores.show', $sensor->id) }}" class="btn btn-round btn-info">Editar</a>
+                    </div>
+                  </div>
+                  <div class="col-md-6 pl-1">
+                    <div class="">
+                      <form action="{{route('sensores.destroy', $sensor->id)}}" method="post">
+                          {{csrf_field()}}
+                          <input name="_method" type="hidden" value="DELETE">
+
+                          <button class="btn btn-round btn-danger" type="submit"> Eliminar</button>
+                      </form>
+                    </div>
+                  </div>
+
+
+                </div>
 
               </td>
           </tr>

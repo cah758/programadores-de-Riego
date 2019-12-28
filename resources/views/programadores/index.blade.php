@@ -57,14 +57,25 @@ programadores
               <td class="text-center">{{ $programador->alta}}</td>
               <td class="text-center">{{ $programador->uconexion}}</td>
               <td class="text-center">
-                <a href="{{ route('programadores.show', $programador->id) }}" class="btn btn-round btn-primary">Ver</a>
-                <a href="{{ route('programadores.update', $programador->id) }}" class="btn btn-round btn-info">Editar</a>
-                <form action="{{route('programadores.destroy', $programador->id)}}" method="post">
-                    {{csrf_field()}}
-                    <input name="_method" type="hidden" value="DELETE">
+                <div class="row">
+                  <div class="col-md-6 pr-1">
+                    <div class="">
+                      <a href="{{ route('programadores.show', $programador->id) }}" class="btn btn-round btn-info">Editar</a>
+                    </div>
+                  </div>
+                  <div class="col-md-6 pl-1">
+                    <div class="">
+                      <form action="{{route('programadores.destroy', $programador->id)}}" method="post">
+                          {{csrf_field()}}
+                          <input name="_method" type="hidden" value="DELETE">
 
-                    <button class="btn btn-round btn-danger" type="submit"> Eliminar</button>
-                </form
+                          <button class="btn btn-round btn-danger" type="submit"> Eliminar</button>
+                      </form>
+                    </div>
+                  </div>
+
+
+                </div>
 
               </td>
           </tr>

@@ -20,7 +20,7 @@ Clientes
           <div class="table-responsive">
 
             <div class="">
-            <a  style="float:left" target="_blank" href="{{ route('clientes.create') }}" class="btn btn-round btn-primary">Añadir Cliente</a>
+            <a  style="float:left" target="_blank" href="{{ route('create') }}" class="btn btn-round btn-primary">Añadir Cliente</a>
             <a style="float:left" class="btn btn-round btn-primary" href="{{ route('clientes.pdf') }}">Exportar a PDF</a>
             <a style="float:left" class="btn btn-round btn-primary" href="{{ route('clientes.export') }}">Exportar a XLS</a>
             <form style="float:right">
@@ -61,12 +61,12 @@ Clientes
                 <div class="row">
                   <div class="col-md-6 pr-1">
                     <div class="">
-                      <a href="{{ route('clientes.update', $cliente->id) }}" class="btn btn-round btn-info">Editar</a>
+                      <a href="{{ route('show', $cliente->id) }}" class="btn btn-round btn-info">Editar</a>
                     </div>
                   </div>
                   <div class="col-md-6 pl-1">
                     <div class="">
-                      <form action="{{route('clientes.destroy', $cliente->id)}}" method="post">
+                      <form action="{{route('destroy', $cliente->id)}}" method="post">
                           {{csrf_field()}}
                           <input name="_method" type="hidden" value="DELETE">
 

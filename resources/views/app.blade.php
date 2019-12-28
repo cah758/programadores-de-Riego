@@ -35,7 +35,7 @@
             </a>
           </li>
           <li>
-            <a href="{{url('/clientes')}}">
+            <a href="{{url('/')}}">
               <i class="now-ui-icons business_badge"></i>
               <p>clientes</p>
             </a>

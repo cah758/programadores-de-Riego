@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Programador;
+use App\Cliente;
 
 class ProgramadorSeeder extends Seeder
 {
@@ -12,14 +13,18 @@ class ProgramadorSeeder extends Seeder
    */
    public function run()
    {
+     $clientes = Cliente::all();
+     $azar[]=$clientes;
+
+
      for ($i=0; $i <30 ; $i++) {
        Programador::create([
          'modelo'=> $this->generateRandomString(10),
          'serie'=> $this->generateRandomString(10),
          'alta'=> $this->randomDate("Y-m-d"),
          'uconexion'=> $this->randomDate("Y-m-d "),
-         'cliente_id' =>random_int(1, 10)
- ]);
+         'cliente_id' => $clientes[array_rand($azar)]->id
+       ]);
      }
 
 
