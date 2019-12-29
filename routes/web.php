@@ -16,8 +16,11 @@ Route::get('profile', ['middleware' => 'auth.basic', function()
 }]);
 
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::resource('/', 'ClienteController');
+Route::resource('clientes', 'ClienteController');
 Route::get('generarClientes', 'ClienteController@pdf')->name('clientes.pdf');
 Route::get('/exportarClientes', 'ClienteController@export')->name('clientes.export');
 

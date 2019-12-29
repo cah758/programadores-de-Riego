@@ -36,7 +36,7 @@ Cliente
       			</div>
       			@endif
 
-      <form method="POST" action="{{ route('store') }}"  role="form">
+      <form method="POST" action="{{ route('clientes.store') }}"  role="form">
         {{ csrf_field() }}
         <div class="row">
           <div class="col-md-12">

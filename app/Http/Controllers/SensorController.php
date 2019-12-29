@@ -70,10 +70,17 @@ class SensorController extends Controller
   return $pdf->download('sensores.pdf');
 }
 
-public function export(){
-    return Excel::download(new ProgramadorExport, 'sensores.xlsx');
-}
+public function export()
+{
+    $data = Sensor::get()->toArray();
 
+    return Excel::create('excel_data', function($excel) use ($data) {
+        $excel->sheet('mySheet', function($sheet) use ($data)
+        {
+            $sheet->fromArray($data);
+        });
+    })->download('xls');
+}
 
 
 }

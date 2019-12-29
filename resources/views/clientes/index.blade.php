@@ -20,23 +20,15 @@ Clientes
           <div class="table-responsive">
 
             <div class="">
-            <a  style="float:left" target="_blank" href="{{ route('create') }}" class="btn btn-round btn-primary">Añadir Cliente</a>
+            <a  style="float:left" target="_blank" href="{{ route('clientes.create') }}" class="btn btn-round btn-primary">Añadir Cliente</a>
             <a style="float:left" class="btn btn-round btn-primary" href="{{ route('clientes.pdf') }}">Exportar a PDF</a>
             <a style="float:left" class="btn btn-round btn-primary" href="{{ route('clientes.export') }}">Exportar a XLS</a>
-            <form style="float:right">
-              <div class="input-group no-border">
-                <input id="searchTerm" type="text" onkeyup="doSearch()" class="form-control" placeholder="Buscar...">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                  </div>
-                </div>
-              </div>
-              </form>
+
             </div>
 
           </div>
-            <table id="regTable" class="table" >
+          <div class=" container-fluid p-5 table-responsive" id="mydatatable-container">
+            <table class="records_list table table-striped table-bordered table-hover" id="mydatatable" >
               <thead class=" text-primary">
       <tr>
           <th class="text-center">Id cliente</th>
@@ -48,6 +40,18 @@ Clientes
           <th class="text-center">Acciones</th>
       </tr>
     </thead>
+    <tfoot>
+    <tr>
+        <th>Filter..</th>
+        <th>Filter..</th>
+        <th>Filter..</th>
+        <th>Filter..</th>
+        <th>Filter..</th>
+        <th>Filter..</th>
+        <th style="visibility:hidden;">Filter..</th>
+
+    </tr>
+</tfoot>
     <tbody>
       @foreach($clientes as $cliente)
           <tr>
@@ -61,12 +65,12 @@ Clientes
                 <div class="row">
                   <div class="col-md-6 pr-1">
                     <div class="">
-                      <a href="{{ route('show', $cliente->id) }}" class="btn btn-round btn-info">Editar</a>
+                      <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-round btn-info">Editar</a>
                     </div>
                   </div>
                   <div class="col-md-6 pl-1">
                     <div class="">
-                      <form action="{{route('destroy', $cliente->id)}}" method="post">
+                      <form action="{{route('clientes.destroy', $cliente->id)}}" method="post">
                           {{csrf_field()}}
                           <input name="_method" type="hidden" value="DELETE">
 
@@ -90,33 +94,52 @@ Clientes
 </div>
 </div>
 </div>
+</div>
 
 
 
 @stop
 @section('script')
 
-<script type="text/javascript">
-function doSearch() {
-
-    var tableReg = document.getElementById('regTable');
-    var searchText = document.getElementById('searchTerm').value.toLowerCase();
-    for (var i = 1; i < tableReg.rows.length-1; i++) {
-        var cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
-        var found = false;
-        for (var j = 0; j < cellsOfRow.length && !found; j++) {
-            var compareWith = cellsOfRow[j].innerHTML.toLowerCase();
-            if (searchText.length == 0 || (compareWith.indexOf(searchText) > -1)) {
-                found = true;
-            }
-        }
-        if (found) {
-            tableReg.rows[i].style.display = '';
-        } else {
-            tableReg.rows[i].style.display = 'none';
-        }
-    }
+<script src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.js"></script>
+<style>
+#mydatatable tfoot input{
+    width: 100% !important;
 }
+#mydatatable tfoot {
+    display: table-header-group !important;
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#mydatatable tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Filtrar.." />' );
+    } );
+
+    var table = $('#mydatatable').DataTable({
+        "dom": 'B<"float-left"i><"float-right"f>t<"float-left"l><"float-right"p><"clearfix">',
+        "responsive": false,
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        },
+        "order": [[ 0, "desc" ]],
+        "initComplete": function () {
+            this.api().columns().every( function () {
+                var that = this;
+
+                $( 'input', this.footer() ).on( 'keyup change', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                            .search( this.value )
+                            .draw();
+                        }
+                });
+            })
+        }
+    });
+});
 </script>
 
 @stop

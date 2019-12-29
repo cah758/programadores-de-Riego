@@ -46,8 +46,6 @@ class ClienteController extends Controller  {
   }
 
   public function update(Request $request, $id)    {
-      //
-
 
       Cliente::find($id)->update($request->all());
       return redirect()->route('clientes.index');
@@ -70,9 +68,16 @@ class ClienteController extends Controller  {
   return $pdf->download('customers.pdf');
 }
 
-public function export(){
+public function export()
+{
+    $data = Cliente::get()->toArray();
 
-    return Excel::download(new ClienteExport, 'clientes.xlsx');
+    return Excel::create('excel_data', function($excel) use ($data) {
+        $excel->sheet('mySheet', function($sheet) use ($data)
+        {
+            $sheet->fromArray($data);
+        });
+    })->download('xls');
 }
 
 }

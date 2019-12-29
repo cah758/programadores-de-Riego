@@ -15,6 +15,7 @@
   <link href="/assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="/assets/demo/demo.css" rel="stylesheet" />
+
 </head>
 
 <body class="">
@@ -35,7 +36,7 @@
             </a>
           </li>
           <li>
-            <a href="{{url('/')}}">
+            <a href="{{url('/clientes')}}">
               <i class="now-ui-icons business_badge"></i>
               <p>clientes</p>
             </a>

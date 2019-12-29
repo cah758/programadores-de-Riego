@@ -71,7 +71,15 @@ class ProgramadorController extends Controller
   return $pdf->download('programadores.pdf');
 }
 
-public function export(){
-    return Excel::download(new ProgramadorExport, 'programadores.xlsx');
+public function export()
+{
+    $data = Programador::get()->toArray();
+
+    return Excel::create('excel_data', function($excel) use ($data) {
+        $excel->sheet('mySheet', function($sheet) use ($data)
+        {
+            $sheet->fromArray($data);
+        });
+    })->download('xls');
 }
 }

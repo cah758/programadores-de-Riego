@@ -14,16 +14,16 @@ class ProgramadorSeeder extends Seeder
    public function run()
    {
      $clientes = Cliente::all();
-     $azar[]=$clientes;
-
+     $modelo = ["A", "B", "C"];
+     $date =new DateTime();
 
      for ($i=0; $i <30 ; $i++) {
        Programador::create([
-         'modelo'=> $this->generateRandomString(10),
+         'modelo'=> $modelo[array_rand($modelo)],
          'serie'=> $this->generateRandomString(10),
          'alta'=> $this->randomDate("Y-m-d"),
-         'uconexion'=> $this->randomDate("Y-m-d "),
-         'cliente_id' => $clientes[array_rand($azar)]->id
+         'uconexion'=> $date->modify('-30 minute'),
+         'cliente_id' => $clientes[rand(0, count($clientes) - 1)]->id
        ]);
      }
 
